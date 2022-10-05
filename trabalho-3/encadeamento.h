@@ -60,19 +60,10 @@ class ListaEncadeada {
         }
 };
 
+
 class TabelaHashEncadeamento{
     private:
-        ListaEncadeada* vetor_listas[MAX];
-
-        void inicializa_ponteiros(){
-            for(int i = 0; i < MAX; i++)
-                vetor_listas[i] = new ListaEncadeada();
-        }
-
-        void desaloca_ponteiros(){
-            for(int i = 0; i < MAX; i++)
-                delete vetor_listas[i];
-        }
+        ListaEncadeada vetor_listas[MAX];
 
         int funcao_hash(int valor){
             return valor % MAX;
@@ -80,21 +71,13 @@ class TabelaHashEncadeamento{
 
 
     public:
-        TabelaHashEncadeamento(){
-            inicializa_ponteiros();
-        }
-
-        ~TabelaHashEncadeamento(){
-            inicializa_ponteiros();
-            desaloca_ponteiros();
-        }
 
         void imprime_tabela(){
             cout << "\tChave" << "\tValor" << endl;
             for(int i =0; i < MAX; i++)
-                if(vetor_listas[i]->inicio){
+                if(vetor_listas[i].inicio){
                     cout << "\t" << i << "\t";
-                    vetor_listas[i]->imprime_lista();
+                    vetor_listas[i].imprime_lista();
             }
             else
                 cout << "\t" << i << "\t(Vazio)" << endl;
@@ -103,13 +86,13 @@ class TabelaHashEncadeamento{
         void insere_valor(int valor){
             int chave = funcao_hash(valor);
             cout << "Inserindo o valor " << valor << " para a chave " << chave << endl;
-            if(vetor_listas[chave]->acessa_valor(valor) != -1){
+            if(vetor_listas[chave].acessa_valor(valor) != -1){
                 cout << "    - O valor já está na tabela!" << endl;
                 return;
             }
-            if(vetor_listas[chave]->inicio)
+            if(vetor_listas[chave].inicio)
                 cout << "    - Houve colisão. Valor encadeado à lista " << endl;
-            vetor_listas[chave]->adiciona_valor(valor);
+            vetor_listas[chave].adiciona_valor(valor);
             imprime_tabela();
              cout << endl;
         }
@@ -118,7 +101,7 @@ class TabelaHashEncadeamento{
             int chave = funcao_hash(valor);
             cout << "Buscando o valor " << valor << " na chave " << chave << endl;
             cout << "    - Verificando se o valor está na lista encadeada contida na chave."<< endl;
-            valor = vetor_listas[chave]->acessa_valor(valor);
+            valor = vetor_listas[chave].acessa_valor(valor);
             if(valor != -1)
                 cout << "    - O valor existe na tabela hash."<< endl;
             else

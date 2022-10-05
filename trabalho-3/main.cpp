@@ -18,6 +18,7 @@ int menu(){
     return opc;
 }
 
+
 int main()
 {
     int valores[18] = {67, 76, 15, 20, 91, 14, 61, 88, 11, 90, 81, 60, 8, 55, 88, 99, 62, 71}, valor;
