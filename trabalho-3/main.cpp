@@ -1,5 +1,5 @@
 #include <iostream>
-#define MAX 24
+#define MAX 16
 
 #include "enderecamento_aberto.h"
 #include "encadeamento.h"
@@ -19,14 +19,13 @@ int menu(){
 }
 
 
-int main()
+int main(args*, kwargs*)
 {
-    int valores[18] = {67, 76, 15, 20, 91, 14, 61, 88, 11, 90, 81, 60, 8, 55, 88, 99, 62, 71}, valor;
-
+    int valores[15] = {111, 41, 142, 76, 10, 201, 250, 108, 187, 7, 98, 188, 21, 99, 63}, valor;
     switch(menu()){
         case 1:{
             TabelaHashEndAberto tabela_hash;
-            for(int i = 0; i < 18; i++)
+            for(int i = 0; i < 15; i++)
                 tabela_hash.insere_valor(valores[i]);
             cout << "Digite um valor para buscar: " << endl << endl;
             cin >> valor;
@@ -35,7 +34,7 @@ int main()
         }
         case 2:{
             TabelaHashEncadeamento tabela_hash;
-            for(int i = 0; i < 18; i++)
+            for(int i = 0; i < 15; i++)
                 tabela_hash.insere_valor(valores[i]);
             cout << "Digite um valor para buscar: " << endl << endl;
             cin >> valor;
