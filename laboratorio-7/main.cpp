@@ -44,7 +44,7 @@ class Avl{
 
         void mostra_arvore_recursivamente(Nodo *nodo_pai){
             if(nodo_pai){
-                cout << nodo_pai->valor << ", " << nodo_pai->altura << endl;
+                cout << nodo_pai->valor << ", " << nodo_pai->altura << ", " << nodo_pai->fator_balanceamento << endl;
                 mostra_arvore_recursivamente(nodo_pai->filho_esq);
                 mostra_arvore_recursivamente(nodo_pai->filho_dir);
             }
@@ -52,7 +52,6 @@ class Avl{
 
         int define_altura(Nodo* nodo_pai){
             int altura_esquerda = 0, altura_direita = 0;
-            cout << nodo_pai->valor;
             if(nodo_pai->filho_esq){
                 altura_esquerda = define_altura(nodo_pai->filho_esq);
             }
@@ -61,7 +60,20 @@ class Avl{
             }
             nodo_pai->altura = altura_esquerda > altura_direita? altura_esquerda : altura_direita;
             return nodo_pai->altura + 1;
+        }
 
+        void define_fator_balanceamaneto(Nodo* nodo_pai){
+            int altura_esq = 0, altura_dir = 0;
+            if(nodo_pai->filho_esq){
+                altura_esq = nodo_pai->filho_esq->altura;
+                define_fator_balanceamaneto(nodo_pai->filho_esq);
+            }
+            if(nodo_pai->filho_dir){
+                altura_dir = nodo_pai->filho_dir->altura;
+                define_fator_balanceamaneto(nodo_pai->filho_dir);
+
+            }
+            nodo_pai->fator_balanceamento = altura_esq - altura_dir;
         }
 
     public:
@@ -79,8 +91,7 @@ class Avl{
 
         void mostra_arvore(){
             define_altura(raiz);
-            // cout << "teste";
-
+            define_fator_balanceamaneto(raiz);
             mostra_arvore_recursivamente(raiz);
         }
 
